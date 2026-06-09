@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Андрей и Валерия — 1 сентября</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:        oklch(0.975 0.012 95);
+    --cream-deep:   oklch(0.955 0.016 92);
+    --paper:        oklch(0.99 0.006 95);
+    --sage:         oklch(0.66 0.045 150);
+    --sage-deep:    oklch(0.46 0.045 152);
+    --sage-soft:    oklch(0.88 0.03 150);
+    --peach:        oklch(0.86 0.055 52);
+    --peach-deep:   oklch(0.72 0.08 48);
+    --gold:         oklch(0.70 0.055 80);
+    --gold-deep:    oklch(0.58 0.06 78);
+    --ink:          oklch(0.34 0.02 150);
+    --ink-soft:     oklch(0.50 0.018 150);
+    --line:         oklch(0.86 0.02 140);
+    --maxw: 1180px;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--cream);
+    color: var(--ink);
+    font-family: "Golos Text", system-ui, sans-serif;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  h1,h2,h3{ font-family:"Cormorant Garamond", Georgia, serif; font-weight:500; margin:0; }
+
+  .wrap{ width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
+
+  .eyebrow{
+    font-size: 12px;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    font-weight: 500;
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .eyebrow::before, .eyebrow::after{
+    content:""; width: 28px; height:1px; background: var(--gold);
+    display:inline-block; opacity:.8;
+  }
+
+  /* ornamental divider — thin double rule with center diamond */
+  .ornament{
+    display:flex; align-items:center; justify-content:center; gap: 14px;
+    margin: 22px auto 0; width: 180px; color: var(--gold-deep);
+  }
+  .ornament .ln{ flex:1; height:1px; background: linear-gradient(90deg, transparent, var(--gold)); }
+  .ornament .ln.r{ background: linear-gradient(90deg, var(--gold), transparent); }
+  .ornament .dia{
+    width:7px; height:7px; transform: rotate(45deg); border:1px solid var(--gold-deep);
+    flex: none; position: relative;
+  }
+  .ornament .dia::after{
+    content:""; position:absolute; inset:2px; background: var(--gold); border-radius:1px;
+  }
+
+  /* monogram emblem */
+  .monogram{
+    font-family:"Cormorant Garamond", serif; font-weight:500;
+    display:inline-flex; align-items:center; justify-content:center;
+    width: 74px; height: 74px; border-radius: 50%;
+    border: 1px solid var(--gold); color: var(--gold-deep);
+    font-size: 26px; letter-spacing: 0.02em; position: relative;
+  }
+  .monogram::before{
+    content:""; position:absolute; inset: 5px; border-radius:50%; border: 1px solid color-mix(in oklab, var(--gold) 45%, transparent);
+  }
+  .monogram .am{ font-style: italic; font-size: 0.72em; margin: 0 1px; color: var(--gold); }
+
+  /* ============ reveal ============ */
+  /* Opacity stays 1 always — content can never be trapped invisible (print / PDF /
+     paused-animation contexts). Entrance is a subtle slide-up only. */
+  .reveal{ transition: transform 1s cubic-bezier(.2,.7,.2,1); }
+  .reveal.pre{ transform: translateY(18px); }
+  @media (prefers-reduced-motion: reduce){ .reveal.pre{ transform:none !important; } }
+
+  /* ============================================================
+     HERO
+  ============================================================ */
+  .hero{
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 84px 24px 64px;
+    overflow: hidden;
+  }
+  /* arch frame — VDNKh main entrance silhouette via border-radius */
+  .arch{
+    position: relative;
+    width: min(560px, 86vw);
+    padding: 56px 40px 48px;
+    border: 1.5px solid var(--sage);
+    border-bottom: none;
+    border-top-left-radius: 280px;
+    border-top-right-radius: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background:
+      linear-gradient(180deg, color-mix(in oklab, var(--paper) 70%, transparent), transparent 60%);
+  }
+  .arch::after{
+    content:"";
+    position:absolute; left:50%; bottom:-1px; transform:translateX(-50%);
+    width: calc(100% + 120px); height:1.5px;
+    background: linear-gradient(90deg, transparent, var(--sage) 18%, var(--sage) 82%, transparent);
+  }
+  .arch-star{
+    margin-bottom: 22px;
+  }
+  .arch-orn{ margin: 4px auto 20px; }
+  .hero .names{
+    font-size: clamp(50px, 9.4vw, 104px);
+    line-height: 0.98;
+    letter-spacing: -0.005em;
+    color: var(--ink);
+    margin: 14px 0 6px;
+  }
+  .hero .amp{ display:block; font-style: italic; color: var(--gold-deep); font-size: 0.62em; margin: 2px 0; font-weight:400; }
+  .hero .sub{
+    font-size: 15px; letter-spacing: 0.06em; color: var(--ink-soft);
+    margin-top: 14px;
+  }
+  .hero .date-row{
+    display:flex; align-items:center; gap: 20px; justify-content:center; flex-wrap:nowrap; white-space:nowrap;
+    margin-top: 30px; font-family:"Cormorant Garamond", serif;
+    font-size: clamp(22px, 3.4vw, 30px); color: var(--sage-deep);
+  }
+  .hero .date-row > span{ white-space:nowrap; }
+  .hero .date-row span.dot{ width:5px; height:5px; border-radius:50%; background: var(--gold); display:inline-block; transform: rotate(45deg); }
+
+  /* personal invitation block */
+  .invite{
+    margin-top: 46px; max-width: 520px;
+    display:flex; flex-direction:column; align-items:center; gap: 6px;
+  }
+  .invite .to{
+    font-family:"Cormorant Garamond", serif; font-style: italic;
+    font-size: clamp(26px, 4.6vw, 38px); line-height:1.1; color: var(--sage-deep);
+  }
+  .invite .lead{
+    font-size: 15.5px; color: var(--ink-soft); line-height:1.65; margin-top: 8px;
+  }
+
+  .scroll-cue{
+    position: absolute; bottom: 26px; left:50%; transform: translateX(-50%);
+    font-size: 11px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--ink-soft);
+    display:flex; flex-direction:column; align-items:center; gap:10px;
+  }
+  .scroll-cue .ln{ width:1px; height:34px; background: linear-gradient(var(--sage), transparent); animation: pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse{ 0%,100%{ opacity:.3; transform:scaleY(.7); } 50%{ opacity:1; transform:scaleY(1);} }
+
+  /* leaves dots decoration */
+  .sprig{ position:absolute; border-radius:50%; background: var(--sage-soft); opacity:.5; }
+
+  /* ============================================================
+     SECTION SCAFFOLD
+  ============================================================ */
+  section.block{ padding: 96px 0; position: relative; }
+  .block.tint{ background: var(--cream-deep); }
+  .section-head{ text-align:center; margin-bottom: 56px; }
+  .section-head h2{ font-size: clamp(34px, 5.2vw, 58px); margin-top: 14px; color: var(--ink); }
+  .rule{ width: 46px; height:1.5px; background: var(--peach-deep); margin: 22px auto 0; }
+  .section-head .eyebrow{ margin-bottom: 2px; }
+
+  /* ============ COUNTDOWN ============ */
+  .count{ display:flex; gap: clamp(16px,4vw,52px); justify-content:center; flex-wrap:wrap; }
+  .count .cell{ text-align:center; min-width: 78px; }
+  .count .num{
+    font-family:"Cormorant Garamond", serif; font-weight:500;
+    font-size: clamp(48px, 8vw, 88px); line-height:1; color: var(--sage-deep);
+    font-variant-numeric: tabular-nums;
+  }
+  .count .lab{ font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-soft); margin-top: 12px; }
+  .count .sep{ font-family:"Cormorant Garamond",serif; font-size: clamp(40px,7vw,72px); color: var(--gold); align-self:flex-start; line-height:1.1; }
+
+  /* ============ PROGRAM ============ */
+  .timeline{ max-width: 660px; margin: 0 auto; }
+  .tl-item{
+    display:grid; grid-template-columns: 96px 1fr; gap: 28px;
+    padding: 26px 0; border-bottom: 1px solid var(--line);
+    align-items: baseline;
+  }
+  .tl-item:last-child{ border-bottom: none; }
+  .tl-time{ font-family:"Cormorant Garamond",serif; font-size: 30px; color: var(--gold-deep); font-weight:500; font-variant-numeric: tabular-nums; }
+  .tl-body h3{ font-size: 25px; margin-bottom: 3px; color: var(--ink); }
+  .tl-body p{ margin:0; color: var(--ink-soft); font-size: 15px; }
+
+  /* ============ DRESS CODE ============ */
+  .dc-intro{ max-width: 560px; margin: 0 auto 52px; text-align:center; color: var(--ink-soft); font-size: 16.5px; }
+  .swatches{
+    display:grid; grid-template-columns: repeat(6, 1fr); gap: 22px; max-width: 760px; margin: 0 auto;
+  }
+  .sw{ text-align:center; }
+  .sw .chip{
+    width: 100%; aspect-ratio: 1; border-radius: 50%;
+    box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--ink) 10%, transparent), 0 8px 20px -12px color-mix(in oklab, var(--ink) 40%, transparent);
+  }
+  .sw .nm{ font-size: 12.5px; color: var(--ink-soft); margin-top: 12px; letter-spacing:0.02em; }
+  .dc-note{ text-align:center; margin-top: 46px; font-size: 14px; color: var(--ink-soft); }
+  .dc-note b{ color: var(--sage-deep); }
+
+  /* ============ MAP / VENUE ============ */
+  .venue{ display:grid; grid-template-columns: 1.05fr 1fr; gap: 56px; align-items:center; max-width: 1000px; margin:0 auto; }
+  .venue h3{ font-size: 34px; color: var(--ink); margin-bottom: 6px; }
+  .venue .addr{ color: var(--ink-soft); font-size: 16.5px; margin: 4px 0 28px; }
+  .venue .photo{
+    width:100%; aspect-ratio: 4/3; border-radius: 6px; overflow:hidden; position:relative;
+    background:
+      repeating-linear-gradient(135deg, var(--cream-deep) 0 14px, var(--paper) 14px 28px);
+    box-shadow: inset 0 0 0 1px var(--line);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .venue .photo img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .venue .photo .ph{
+    font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 12px;
+    letter-spacing: 0.04em; color: var(--ink-soft); text-align:center; padding: 0 24px; line-height:1.7;
+  }
+  .venue .photo .ph b{ display:block; color: var(--sage-deep); font-weight:600; margin-bottom:4px; letter-spacing:0.12em; text-transform:uppercase; font-size:11px; }
+  .btn{
+    display:inline-flex; align-items:center; gap:10px;
+    font-family:"Golos Text",sans-serif; font-size: 14.5px; font-weight:500; letter-spacing: 0.02em;
+    padding: 15px 28px; border-radius: 999px; text-decoration:none; cursor:pointer; border: 1.5px solid transparent;
+    transition: transform .25s ease, background .25s ease, color .25s ease, box-shadow .25s ease;
+  }
+  .btn-primary{ background: var(--sage-deep); color: var(--paper); }
+  .btn-primary:hover{ transform: translateY(-2px); box-shadow: 0 14px 28px -14px var(--sage-deep); }
+  .btn-ghost{ background: transparent; color: var(--sage-deep); border-color: var(--sage); }
+  .btn-ghost:hover{ background: var(--sage-soft); transform: translateY(-2px); }
+  .venue .map-note{ font-size: 13px; color: var(--ink-soft); margin-top: 16px; }
+
+  /* ============ GIFTS ============ */
+  .gifts-inner{ max-width: 620px; margin:0 auto; text-align:center; }
+  .gifts-inner p{ font-size: 17px; color: var(--ink-soft); line-height:1.75; }
+  .gift-card{
+    margin-top: 40px; padding: 40px 36px; background: var(--paper);
+    border: 1px solid var(--line); border-radius: 4px; position:relative;
+  }
+  .gift-card::before, .gift-card::after{
+    content:""; position:absolute; width:18px; height:18px; border:1.5px solid var(--peach-deep);
+  }
+  .gift-card::before{ top:10px; left:10px; border-right:none; border-bottom:none; }
+  .gift-card::after{ bottom:10px; right:10px; border-left:none; border-top:none; }
+
+  /* ============ RSVP ============ */
+  .rsvp{ background: var(--sage-deep); color: var(--paper); text-align:center; }
+  .rsvp .eyebrow{ color: color-mix(in oklab, var(--paper) 78%, var(--sage)); }
+  .rsvp h2{ color: var(--paper); }
+  .rsvp .rule{ background: var(--peach); }
+  .rsvp .ornament{ color: var(--peach); }
+  .rsvp .ornament .ln{ background: linear-gradient(90deg, transparent, var(--peach)); }
+  .rsvp .ornament .ln.r{ background: linear-gradient(90deg, var(--peach), transparent); }
+  .rsvp .ornament .dia{ border-color: var(--peach); }
+  .rsvp .ornament .dia::after{ background: var(--peach); }
+  .rsvp .monogram{ border-color: color-mix(in oklab, var(--peach) 70%, transparent); color: var(--peach); }
+  .rsvp .monogram::before{ border-color: color-mix(in oklab, var(--peach) 40%, transparent); }
+  .rsvp .monogram .am{ color: var(--peach); }
+  .rsvp p{ max-width: 520px; margin: 0 auto 14px; color: color-mix(in oklab, var(--paper) 86%, transparent); font-size: 16.5px; }
+  .rsvp .you{ font-style: italic; font-family:"Cormorant Garamond",serif; font-size: 24px; color: var(--peach); }
+  .rsvp-btns{ display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-top: 36px; }
+  .btn-light{ background: var(--paper); color: var(--sage-deep); }
+  .btn-light:hover{ transform: translateY(-2px); box-shadow: 0 14px 30px -14px rgba(0,0,0,.5); }
+  .btn-outline-light{ background: transparent; border-color: color-mix(in oklab, var(--paper) 55%, transparent); color: var(--paper); }
+  .btn-outline-light:hover{ background: color-mix(in oklab, var(--paper) 14%, transparent); transform: translateY(-2px); }
+  .rsvp .deadline{ margin-top: 30px; font-size: 13px; letter-spacing:0.08em; color: color-mix(in oklab, var(--paper) 70%, transparent); }
+
+  /* ============ FOOTER ============ */
+  footer{ text-align:center; padding: 64px 24px 72px; background: var(--cream); }
+  footer .ff-names{ font-family:"Cormorant Garamond",serif; font-size: 40px; color: var(--sage-deep); }
+  footer .ff-amp{ font-style:italic; }
+  footer .ff-date{ margin-top:8px; font-size: 13px; letter-spacing:0.24em; text-transform:uppercase; color: var(--ink-soft); }
+
+  /* ============ ADMIN GENERATOR ============ */
+  #admin{
+    position: fixed; inset: 0; background: color-mix(in oklab, var(--ink) 42%, transparent);
+    display:none; align-items:center; justify-content:center; z-index: 100; padding: 20px;
+    backdrop-filter: blur(3px);
+  }
+  #admin.on{ display:flex; }
+  .admin-card{ background: var(--paper); border-radius: 8px; padding: 36px 34px; width: min(520px, 100%); box-shadow: 0 30px 80px -24px rgba(0,0,0,.5); }
+  .admin-card h3{ font-size: 28px; margin-bottom: 4px; }
+  .admin-card .ac-sub{ color: var(--ink-soft); font-size: 14px; margin-bottom: 24px; }
+  .admin-card label{ font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); display:block; margin-bottom: 8px; }
+  .admin-card input{
+    width: 100%; padding: 13px 15px; border: 1.5px solid var(--line); border-radius: 6px;
+    font-family:"Golos Text",sans-serif; font-size: 15px; color: var(--ink); background: var(--cream); margin-bottom: 18px;
+  }
+  .admin-card input:focus{ outline:none; border-color: var(--sage); }
+  .gen-out{ display:flex; gap:10px; }
+  .gen-out input{ margin-bottom:0; }
+  .ac-close{ position:absolute; }
+  .admin-foot{ display:flex; justify-content:space-between; align-items:center; margin-top: 22px; }
+  .ac-x{ background:none; border:none; color: var(--ink-soft); cursor:pointer; font-size: 13px; text-decoration: underline; }
+  .copied{ color: var(--sage-deep); font-size: 13px; opacity:0; transition: opacity .3s; }
+  .copied.show{ opacity:1; }
+
+  @media (max-width: 760px){
+    section.block{ padding: 72px 0; }
+    .venue{ grid-template-columns: 1fr; gap: 36px; }
+    .venue .v-text{ text-align:center; }
+    .venue .v-text .btn{ margin: 0 auto; }
+    .swatches{ grid-template-columns: repeat(3, 1fr); gap: 26px 18px; }
+    .tl-item{ grid-template-columns: 72px 1fr; gap: 18px; }
+    .count .sep{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ====================== HERO ====================== -->
+<header class="hero" data-screen-label="Hero">
+  <div class="sprig" style="width:120px;height:120px;top:8%;left:-30px;"></div>
+  <div class="sprig" style="width:80px;height:80px;bottom:14%;right:-10px;opacity:.4;"></div>
+  <div class="sprig" style="width:46px;height:46px;top:22%;right:12%;opacity:.35;"></div>
+
+  <div class="arch reveal">
+    <p class="eyebrow">Приглашение на регистрацию</p>
+    <div class="ornament arch-orn"><span class="ln"></span><span class="dia"></span><span class="ln r"></span></div>
+    <h1 class="names">Андрей<span class="amp">&amp;</span>Валерия</h1>
+    <div class="date-row">
+      <span>1 сентября</span><span class="dot"></span><span>2026</span>
+    </div>
+    <p class="sub">Дворец бракосочетания ВДНХ · Москва</p>
+  </div>
+
+  <div class="invite reveal">
+    <div class="to" id="guestName">Дорогие гости</div>
+    <p class="lead" id="guestLine">с большой радостью приглашаем вас разделить с нами самый счастливый день и стать свидетелями рождения нашей семьи.</p>
+  </div>
+
+  <div class="scroll-cue">
+    <span>листайте</span>
+    <span class="ln"></span>
+  </div>
+</header>
+
+<!-- ====================== COUNTDOWN ====================== -->
+<section class="block tint" data-screen-label="Countdown">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">До встречи остаётся</p>
+      <div class="ornament"><span class="ln"></span><span class="dia"></span><span class="ln r"></span></div>
+    </div>
+    <div class="count reveal" id="countdown" aria-live="polite">
+      <div class="cell"><div class="num" id="cd-d">—</div><div class="lab">дней</div></div>
+      <div class="sep">:</div>
+      <div class="cell"><div class="num" id="cd-h">—</div><div class="lab">часов</div></div>
+      <div class="sep">:</div>
+      <div class="cell"><div class="num" id="cd-m">—</div><div class="lab">минут</div></div>
+      <div class="sep">:</div>
+      <div class="cell"><div class="num" id="cd-s">—</div><div class="lab">секунд</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== PROGRAM ====================== -->
+<section class="block" data-screen-label="Программа">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Как пройдёт день</p>
+      <h2>Программа</h2>
+      <div class="ornament"><span class="ln"></span><span class="dia"></span><span class="ln r"></span></div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item reveal">
+        <div class="tl-time">11:00</div>
+        <div class="tl-body"><h3>Сбор гостей</h3><p>Встречаемся у Дворца бракосочетания ВДНХ и делаем первые кадры.</p></div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-time">11:15</div>
+        <div class="tl-body"><h3>Церемония</h3><p>Торжественная регистрация нашего брака — самый волнующий момент дня.</p></div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-time">12:00</div>
+        <div class="tl-body"><h3>Фуршет и поздравления</h3><p>Бокал игристого, тёплые слова и общие фотографии на память.</p></div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-time">13:00</div>
+        <div class="tl-body"><h3>Прогулка и завершение</h3><p>Неспешно пройдёмся по аллеям парка — и на этой светлой ноте наша встреча мягко завершится.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== DRESS CODE ====================== -->
+<section class="block tint" data-screen-label="Дресс-код">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Несколько слов о нарядах</p>
+      <h2>Дресс-код</h2>
+      <div class="ornament"><span class="ln"></span><span class="dia"></span><span class="ln r"></span></div>
+    </div>
+    <p class="dc-intro reveal">Будем благодарны, если вы поддержите атмосферу праздника и выберете наряд в&nbsp;нежных пастельных тонах. Вот палитра-ориентир:</p>
+    <div class="swatches reveal" id="swatches"></div>
+    <p class="dc-note reveal">Мы мечтаем, чтобы этот день остался в памяти нежным и лёгким, а общие кадры — цельными. Поэтому мягко просим обойтись <b>без ярких и насыщенных цветов</b>, а также <b>без крупных логотипов и ярких принтов</b> на одежде.</p>
+  </div>
+</section>
+
+<!-- ====================== VENUE / MAP ====================== -->
+<section class="block" data-screen-label="Как добраться">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Место встречи</p>
+      <h2>Как добраться</h2>
+      <div class="ornament"><span class="ln"></span><span class="dia"></span><span class="ln r"></span></div>
+    </div>
+    <div class="venue">
+      <div class="v-text reveal">
+        <h3>Дворец бракосочетания ВДНХ</h3>
+        <p class="addr">просп. Мира, 119, ВДНХ, Москва</p>
+        <p style="color:var(--ink-soft);font-size:16px;max-width:420px;margin-bottom:28px;">
+          Ближайшая станция метро — «ВДНХ». От главного входа идём по центральной аллее в сторону фонтанов.
+        </p>
+        <a class="btn btn-primary" id="mapLink" href="#" target="_blank" rel="noopener">
+          Открыть в Яндекс.Картах →
+        </a>
+        <p class="map-note">Маршрут построится автоматически от вашего местоположения.</p>
+      </div>
+      <div class="reveal">
+        <div class="photo">
+          <img src="images/dvorets-vdnh.png" alt="Дворец бракосочетания ВДНХ">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== GIFTS ====================== -->
+<section class="block tint" data-screen-label="Подарки">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Деликатный вопрос</p>
+      <h2>Пожелания по&nbsp;подаркам</h2>
+      <div class="ornament"><span class="ln"></span><span class="dia"></span><span class="ln r"></span></div>
+    </div>
+    <div class="gifts-inner reveal">
+      <p>Самый главный подарок для нас — это вы рядом в этот день. Если же вам захочется порадовать нас чем-то большим, мы будем искренне признательны за ваш вклад в наше семейное будущее.</p>
+      <div class="gift-card">
+        <p style="margin:0;color:var(--ink);font-size:17px;">А вот вместо букетов мы будем рады <b style="color:var(--sage-deep)">одному пионовидному цветку</b> от каждого из вас — из них мы соберём один общий букет, который останется тёплым воспоминанием об этом дне.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== RSVP ====================== -->
+<section class="block rsvp" data-screen-label="RSVP">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Подтверждение</p>
+      <h2>Вы с нами?</h2>
+      <div class="ornament"><span class="ln"></span><span class="dia"></span><span class="ln r"></span></div>
+    </div>
+    <p class="reveal" id="rsvpGreeting">Будем счастливы видеть вас на нашем празднике.</p>
+    <p class="reveal">Пожалуйста, подтвердите своё присутствие — нажмите кнопку, и нам придёт сообщение.</p>
+    <div class="rsvp-btns reveal">
+      <a class="btn btn-light" id="tgBtn" href="#" target="_blank" rel="noopener">Написать в Telegram</a>
+      <a class="btn btn-outline-light" id="waBtn" href="#" target="_blank" rel="noopener">Написать в WhatsApp</a>
+    </div>
+    <p class="deadline reveal">Просим ответить до 1 августа 2026</p>
+  </div>
+</section>
+
+<!-- ====================== FOOTER ====================== -->
+<footer>
+  <div class="ff-names">Андрей <span class="ff-amp">&amp;</span> Валерия</div>
+  <div class="ff-date">01 · 09 · 2026 · ВДНХ</div>
+</footer>
+
+<!-- ====================== ADMIN GENERATOR ====================== -->
+<div id="admin">
+  <div class="admin-card">
+    <h3>Генератор приглашений</h3>
+    <p class="ac-sub">Введите имя гостя — получите персональную ссылку. Скопируйте и отправьте.</p>
+    <label for="gName">Имя гостя (как обратиться)</label>
+    <input id="gName" type="text" placeholder="Например: Анна и Михаил" autocomplete="off">
+    <label for="gLink">Персональная ссылка</label>
+    <div class="gen-out">
+      <input id="gLink" type="text" readonly>
+      <button class="btn btn-primary" id="copyBtn" style="padding:13px 22px;">Копировать</button>
+    </div>
+    <div class="admin-foot">
+      <span class="copied" id="copiedMsg">Скопировано ✓</span>
+      <button class="ac-x" id="closeAdmin">Закрыть</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   НАСТРОЙКИ — поменяйте под себя
+   ============================================================ */
+const CONFIG = {
+  // Дата и время свадьбы (Москва). Формат: год, месяц(1-12), день, час, минута
+  wedding: { y: 2026, mo: 9, d: 1, h: 11, min: 0 },
+
+  // Ссылка на ЗАГС в Яндекс.Картах — вставьте свою
+  yandexMapUrl: "https://yandex.ru/maps/org/dvorets_brakosochetaniya_vdnkh/",
+
+  // RSVP: куда придёт ответ
+  telegramUsername: "wey0nd",   // без @, например: lera_andrey
+  whatsappPhone:    "79324156427",     // только цифры, формат 7XXXXXXXXXX
+};
+
+/* ---------- Персонализация ?guest=Имя ---------- */
+const params = new URLSearchParams(location.search);
+const guestRaw = (params.get("guest") || "").trim();
+const guest = guestRaw ? decodeURIComponent(guestRaw) : "";
+
+if (guest) {
+  document.getElementById("guestName").textContent = guest;
+  document.getElementById("guestLine").textContent =
+    'с большой радостью приглашаем вас разделить с нами самый счастливый день и стать свидетелями рождения нашей семьи.';
+  document.getElementById("rsvpGreeting").innerHTML =
+    '<span class="you">' + escapeHtml(guest) + '</span>, будем счастливы видеть вас на нашем празднике.';
+}
+
+/* ---------- Яндекс.Карты ---------- */
+document.getElementById("mapLink").href = CONFIG.yandexMapUrl;
+
+/* ---------- RSVP кнопки ---------- */
+const who = guest ? (guest + ", ") : "";
+const rsvpText = "Здравствуйте! " + who + "подтверждаю(-ем) присутствие на регистрации Андрея и Валерии 1 сентября ✨";
+document.getElementById("tgBtn").href = "https://t.me/" + CONFIG.telegramUsername;
+document.getElementById("waBtn").href = "https://wa.me/" + CONFIG.whatsappPhone + "?text=" + encodeURIComponent(rsvpText);
+
+/* ---------- Дресс-код: палитра ---------- */
+const PALETTE = [
+  ["#EAE2D6", "Крем"],
+  ["#C9D6C1", "Шалфей"],
+  ["#A9C2B0", "Эвкалипт"],
+  ["#F2D9C7", "Персик"],
+  ["#E7C8C2", "Пудра"],
+  ["#D8DCE6", "Дымчатый"],
+];
+document.getElementById("swatches").innerHTML = PALETTE.map(function(c){
+  return '<div class="sw"><div class="chip" style="background:'+c[0]+'"></div><div class="nm">'+c[1]+'</div></div>';
+}).join("");
+
+/* ---------- Обратный отсчёт ---------- */
+const W = CONFIG.wedding;
+// время Москвы (UTC+3)
+const target = new Date(Date.UTC(W.y, W.mo - 1, W.d, W.h - 3, W.min, 0));
+function tick(){
+  const now = new Date();
+  let diff = Math.max(0, target - now);
+  const dd = Math.floor(diff / 864e5); diff -= dd*864e5;
+  const hh = Math.floor(diff / 36e5);  diff -= hh*36e5;
+  const mm = Math.floor(diff / 6e4);   diff -= mm*6e4;
+  const ss = Math.floor(diff / 1e3);
+  document.getElementById("cd-d").textContent = dd;
+  document.getElementById("cd-h").textContent = String(hh).padStart(2,"0");
+  document.getElementById("cd-m").textContent = String(mm).padStart(2,"0");
+  document.getElementById("cd-s").textContent = String(ss).padStart(2,"0");
+}
+tick(); setInterval(tick, 1000);
+
+/* ---------- Reveal on scroll (robust) ---------- */
+(function(){
+  const els = Array.prototype.slice.call(document.querySelectorAll(".reveal"));
+  const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // hide first (only if motion is welcome); revealing simply removes the hidden class,
+  // which snaps visible even if transitions never run.
+  if (!reduce) els.forEach(function(el){ el.classList.add("pre"); });
+  function reveal(el){ el.classList.remove("pre"); }
+  function revealInView(){
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    els.forEach(function(el){
+      if (!el.classList.contains("pre")) return;
+      const r = el.getBoundingClientRect();
+      if (r.top < vh * 0.92 && r.bottom > 0) reveal(el);
+    });
+  }
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ reveal(e.target); io.unobserve(e.target);} });
+    }, { threshold: 0.12 });
+    els.forEach(function(el){ io.observe(el); });
+  }
+  window.addEventListener("scroll", revealInView, { passive: true });
+  window.addEventListener("resize", revealInView);
+  revealInView();
+  requestAnimationFrame(revealInView);
+  window.addEventListener("load", revealInView);
+  setTimeout(function(){ els.forEach(reveal); }, 2200);
+})();
+
+/* ---------- Admin генератор (?admin=1 или Shift+A) ---------- */
+const adminEl = document.getElementById("admin");
+const gName = document.getElementById("gName");
+const gLink = document.getElementById("gLink");
+function baseUrl(){ return location.origin + location.pathname; }
+function buildLink(){
+  const n = gName.value.trim();
+  gLink.value = n ? (baseUrl() + "?guest=" + encodeURIComponent(n)) : baseUrl();
+}
+gName.addEventListener("input", buildLink);
+function openAdmin(){ adminEl.classList.add("on"); buildLink(); gName.focus(); }
+function closeAdmin(){ adminEl.classList.remove("on"); }
+document.getElementById("closeAdmin").addEventListener("click", closeAdmin);
+adminEl.addEventListener("click", function(e){ if(e.target === adminEl) closeAdmin(); });
+document.getElementById("copyBtn").addEventListener("click", function(){
+  gLink.select();
+  navigator.clipboard.writeText(gLink.value).then(function(){
+    const m = document.getElementById("copiedMsg"); m.classList.add("show");
+    setTimeout(function(){ m.classList.remove("show"); }, 1800);
+  });
+});
+if (params.get("admin") === "1") openAdmin();
+document.addEventListener("keydown", function(e){
+  if (e.shiftKey && (e.key === "A" || e.key === "Ф")) openAdmin();
+  if (e.key === "Escape") closeAdmin();
+});
+
+/* ---------- utils ---------- */
+function escapeHtml(s){
+  return s.replace(/[&<>"']/g, function(c){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
+  });
+}
+</script>
+</body>
+</html>
